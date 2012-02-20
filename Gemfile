@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
-
+gem 'cucumber', '1.1.4'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
@@ -18,7 +18,7 @@ group :development, :test do
   gem 'simplecov'
 end
 group :production do
-#  gem 'pg'
+  gem 'pg'
 end
 
 # Gems used only for assets and not required
@@ -40,3 +40,4 @@ gem 'jquery-rails'
 
 # To use debugger
 gem 'haml'
+
