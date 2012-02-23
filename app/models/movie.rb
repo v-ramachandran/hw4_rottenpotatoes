@@ -6,7 +6,7 @@ class Movie < ActiveRecord::Base
     m_temp = Movie.find(id)
     d = m_temp.director
     t = m_temp.title
-    m = Movie.where("title != :t AND director == :d AND director != ''", {:d => d, :t=>t})
+    m = Movie.where("title != :t AND director = :d AND director != ''", {:d => d, :t=>t})
     return m    
   end
 end
