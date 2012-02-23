@@ -14,11 +14,13 @@ class MoviesController < ApplicationController
       return
     end
     flash[:warning] = "'#{@movie.title}' has no director info"
-    redirect_to movies_path
+    #flash.keep
+    redirect_to movies_path#, :notice =>"'#{@movie.title}' has no director info"
+    #flash.keep(:warning)
   end
 
   def index
-    #flash[:notice] = flash[:notice]
+
     sort = params[:sort] || session[:sort]
     case sort
     when 'title'
@@ -31,12 +33,14 @@ class MoviesController < ApplicationController
 
     if params[:sort] != session[:sort]
       session[:sort] = sort
+      flash.keep(:warning)
       redirect_to :sort => sort, :ratings => @selected_ratings and return
     end
 
     if params[:ratings] != session[:ratings] and @selected_ratings != {}
       session[:sort] = sort
       session[:ratings] = @selected_ratings
+      flash.keep(:warning)
       redirect_to :sort => sort, :ratings => @selected_ratings and return
     end
     @movies = Movie.find_all_by_rating(@selected_ratings.keys, ordering)
