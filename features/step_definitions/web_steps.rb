@@ -226,6 +226,11 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
     end
   end
 end
+
+Then /^I debug$/ do
+  breakpoint
+  0
+end
  
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
@@ -252,3 +257,18 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Then /I should see the following: (.*)/ do |list|
+  temp = list.split(%r{,\s*})
+  temp.each do |ls|
+    step %Q{I should see "#{ls}"}      
+  end
+end
+
+Then /I should not see the following: (.*)/ do |list|
+  temp = list.split(%r{,\s*})
+  temp.each do |ls|
+    step %Q{I should not see "#{ls}"}      
+  end
+end
+
